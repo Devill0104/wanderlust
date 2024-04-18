@@ -4,6 +4,7 @@ const path=require("path");
 const mongoose=require("mongoose");
 const mongo_url="mongodb://127.0.0.1:27017/wanderlust";
 const Listing = require("./models/listing.js");
+const methodOverride=require("method-override");
 
 app.set("view engine", "ejs");
 app.set("views",path.join(__dirname,"views"));
@@ -24,15 +25,28 @@ app.get("/listings", async (req, res)=>{
 });
 
 //show route
-app.get("/listings/:_id", async (req, res)=>{
+app.get("/listings/:id", async (req, res)=>{
     let {id}=req.params;
-    console.log(id);
+    // console.log(id);
     let listing= await Listing.findById(id);
-    console.log(listing);
+    // console.log(listing);
     // res.send(" working");
     res.render("listings/show.ejs",{listing});
 });
 
+//edit route
+app.get("/listings/:id/edit", async (req, res)=>{
+    let {id}= req.params;
+    let listing= await Listing.findById(id);
+    res.render("listings/edit.ejs", {listing});
+});
+
+//update route
+app.post("/listings/:id", async (req, res)=>{
+    let {id}=req.params;
+    await Listing.findByIdAndUpdate(id, {...req.body.listing});
+    res.redirect(`/listings/${id}`);
+});
 
 app.listen("8080", ()=>{
     console.log(" server is listening");
