@@ -21,12 +21,26 @@ main().then(()=>{
 async function main(){
     await mongoose.connect(mongo_url);
 }
+//create route
+app.get("/listings/new", (req,res)=>{
+    res.render("/listings/new.ejs");
+});
 
 //home  route 
 app.get("/listings", async (req, res)=>{
     let allListings = await Listing.find({});
     res.render("listings/index.ejs",{allListings});
 });
+
+
+
+//add route
+app.post("/listings", async (req, res)=>{
+    let newListing= new Listing(req.body.listing);
+    await newListing.save();
+    res.redirect("/listings");
+});
+
 
 //show route
 app.get("/listings/:id", async (req, res)=>{
@@ -52,6 +66,9 @@ app.put("/listings/:id", async (req, res)=>{
     res.redirect(`/listings/${id}`);
 });
 
+
+
+
 app.listen("8080", ()=>{
     console.log(" server is listening");
-})
+});
