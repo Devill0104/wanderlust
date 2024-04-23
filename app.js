@@ -21,10 +21,7 @@ main().then(()=>{
 async function main(){
     await mongoose.connect(mongo_url);
 }
-//create route
-app.get("/listings/new", (req,res)=>{
-    res.render("/listings/new.ejs");
-});
+
 
 //home  route 
 app.get("/listings", async (req, res)=>{
@@ -32,7 +29,10 @@ app.get("/listings", async (req, res)=>{
     res.render("listings/index.ejs",{allListings});
 });
 
-
+//create route
+app.get("/listings/new", (req,res)=>{
+    res.render("listings/new.ejs");
+});
 
 //add route
 app.post("/listings", async (req, res)=>{
@@ -66,7 +66,13 @@ app.put("/listings/:id", async (req, res)=>{
     res.redirect(`/listings/${id}`);
 });
 
-
+//delete route
+app.delete("/listings/:id", async (req, res)=>{
+    let {id}=req.params;
+    let deletedListing = await Listing.findByIdAndDelete(id);
+    console.log(deletedListing);
+    res.redirect("/listings");
+});
 
 
 app.listen("8080", ()=>{

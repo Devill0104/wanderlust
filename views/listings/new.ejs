@@ -1,21 +1,14 @@
-<!-- <% layout("/layouts/boilerplate.ejs") -->
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
+
+<% layout("/layouts/boilerplate.ejs") %>
 <body>
     <form action="/listings" method="POST">
-        <input type="text" name="listing[title]" placeholder="enter the title">
-        <textarea name="listing[title]" >Write the description here</textarea>
-        <input type="text" name="listing[image]" placeholder="enter the image url">
-        <input type="text" name="listing[price]" placeholder="enter the price">
-        <input type="text" name="listing[location]" placeholder="enter the location">
-        <input type="text" name="listing[country]" placeholder="enter the country">
+        <input type="text" name="listing[title]" placeholder="enter the title"><br><br>
+        <textarea name="listing[description]" >Write the description here</textarea><br><br>
+        <input type="text" name="listing[image]" placeholder="enter the image url"><br><br>
+        <input type="number" name="listing[price]" placeholder="enter the price"><br><br>
+        <input type="text" name="listing[location]" placeholder="enter the location"><br><br>
+        <input type="text" name="listing[country]" placeholder="enter the country"><br><br>
         <button>Add</button>
     </form>
 </body>
-</html>
 
