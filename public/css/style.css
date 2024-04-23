@@ -1,6 +1,20 @@
-/* body{
-    background-color: orange;
-} */
+body{
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+.container{
+    flex: 1;
+}
+.c-btn{
+    background-color: #fe424d !important;
+    border-radius: 0.2rem;
+    border: none;
+    margin-bottom: 1rem;
+}
+h2{
+    text-align: center;
+}
 /*navbar*/
 .navbar{
     height: 5rem;
@@ -45,4 +59,9 @@
 .f-info-socials i{
     font-size: 1.2rem;
     margin-right: 1rem;
+}
+
+/*styling show ejs*/
+.show-img{
+    height: 30vh;
 }

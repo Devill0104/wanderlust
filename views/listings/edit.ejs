@@ -1,16 +1,31 @@
 
     <% layout("/layouts/boilerplate.ejs") %>
-    <body>
-        <h3>Edit this Listing</h3>
+    <div class="row mt-3">
+        <h2>Edit this Listing</h2>
+        <div class="col-8 offset-2">
+            <form action="/listings/<%= listing._id%>?_method=PUT" method="POST">
+                
+                    <input class="mb-3 form-control" type="text" name="listing[title]" value="<%= listing.title%>">
+               
+                
+                    <textarea class="mb-3 form-control" name="listing[description]" ><%= listing.description%></textarea>
+                
+              
+                    <input type="text" class="mb-3 form-control" name="listing[image]" value="<%= listing.image%>">
+              
+               
+                    <input class="mb-3 form-control" type="text" name="listing[price]" value="<%= listing.price%>">
+                
+                
+                    <input class="mb-3 form-control" type="text" name="listing[location]" value="<%= listing.location%>">
+                
+              
+                    <input class="mb-3 form-control" type="text" name="listing[country]" value="<%= listing.country%>">
+               
+                <button class="c-btn">Save</button>
+            </form>
+        </div>
+    </div>
+        
     
-        <form action="/listings/<%= listing._id%>?_method=PUT" method="POST">
-            <input type="text" name="listing[title]" value="<%= listing.title%>"><br><br>
-            <textarea  name="listing[description]" ><%= listing.description%></textarea><br><br>
-            <input type="text" name="listing[image]" value="<%= listing.image%>"><br><br>
-            <input type="text" name="listing[price]" value="<%= listing.price%>"><br><br>
-            <input type="text" name="listing[location]" value="<%= listing.location%>"><br><br>
-            <input type="text" name="listing[country]" value="<%= listing.country%>"><br><br>
-            <button>Save</button>
-        </form>
-    </body>
     
