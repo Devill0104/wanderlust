@@ -11,7 +11,8 @@ const listingSchema = new mongoose.Schema({
 
     image:{
         type: String,
-       set(v){v===""?"C:\Users\adity\Downloads\pexels-pixabay-259588.jpg":v;}
+        default : "C:\Users\adity\OneDrive\Desktop\apma\major_project\fernando-alvarez-rodriguez-M7GddPqJowg-unsplash.jpg",
+        set: (v) =>v === ""? "https://unsplash.com/photos/soccer-field-6J7eIvNwttQ":v,
     },
     price: Number,
     location: String,
