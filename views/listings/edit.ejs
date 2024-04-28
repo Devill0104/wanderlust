@@ -4,24 +4,12 @@
         <h2>Edit this Listing</h2>
         <div class="col-8 offset-2">
             <form action="/listings/<%= listing._id%>?_method=PUT" method="POST">
-                
-                    <input class="mb-3 form-control" type="text" name="listing[title]" value="<%= listing.title%>">
-               
-                
-                    <textarea class="mb-3 form-control" name="listing[description]" ><%= listing.description%></textarea>
-                
-              
-                    <input type="text" class="mb-3 form-control" name="listing[image]" value="<%= listing.image%>">
-              
-               
-                    <input class="mb-3 form-control" type="text" name="listing[price]" value="<%= listing.price%>">
-                
-                
-                    <input class="mb-3 form-control" type="text" name="listing[location]" value="<%= listing.location%>">
-                
-              
-                    <input class="mb-3 form-control" type="text" name="listing[country]" value="<%= listing.country%>">
-               
+                <input class="mb-3 form-control" type="text" name="listing[title]" value="<%= listing.title%>" class="form-control">
+                <textarea class="mb-3 form-control" name="listing[description]" class="form-control"><%= listing.description%></textarea>
+                <input type="text" class="mb-3 form-control" name="listing[image]" value="<%= listing.image%>" class="form-control">
+                <input class="mb-3 form-control" type="text" name="listing[price]" value="<%= listing.price%>" class="form-control">
+                <input class="mb-3 form-control" type="text" name="listing[location]" value="<%= listing.location%>" class="form-control">
+                <input class="mb-3 form-control" type="text" name="listing[country]" value="<%= listing.country%>" class="form-control">
                 <button class="c-btn">Save</button>
             </form>
         </div>
