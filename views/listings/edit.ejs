@@ -3,17 +3,35 @@
     <div class="row mt-3">
         <h2>Edit this Listing</h2>
         <div class="col-8 offset-2">
-            <form action="/listings/<%= listing._id%>?_method=PUT" method="POST">
-                <input class="mb-3 form-control" type="text" name="listing[title]" value="<%= listing.title%>" class="form-control">
-                <textarea class="mb-3 form-control" name="listing[description]" class="form-control"><%= listing.description%></textarea>
-                <input type="text" class="mb-3 form-control" name="listing[image]" value="<%= listing.image%>" class="form-control">
-                <input class="mb-3 form-control" type="text" name="listing[price]" value="<%= listing.price%>" class="form-control">
-                <input class="mb-3 form-control" type="text" name="listing[location]" value="<%= listing.location%>" class="form-control">
-                <input class="mb-3 form-control" type="text" name="listing[country]" value="<%= listing.country%>" class="form-control">
+            <form action="/listings/<%= listing._id%>?_method=PUT" method="POST" novalidate class="needs-validation">
+                <div class="mb-3">
+                    <input class="mb-3 form-control" type="text" name="listing[title]" value="<%= listing.title%>" class="form-control" required>
+                    <div class="invalid-feedback"> Title can not be empty</div>
+                </div>
+                <div class="mb-3">
+                    <textarea class="mb-3 form-control" name="listing[description]" class="form-control" required><%= listing.description%></textarea>
+                    <div class="invalid-feedback"> Please provide the description</div>
+                </div>
+                <div class="mb-3">
+                     <input type="text" class="mb-3 form-control" name="listing[image]" value="<%= listing.image%>" class="form-control">
+                    </div>
+                <div class="mb-3">
+                    <input class="mb-3 form-control" type="text" name="listing[price]" value="<%= listing.price%>" class="form-control" required>
+                    <div class="invalid-feedback"> Price should be valid</div>
+                </div>
+                <div class="mb-3">
+                    <input class="mb-3 form-control" type="text" name="listing[location]" value="<%= listing.location%>" class="form-control" required>
+                    <div class="invalid-feedback"> Location can not be empty</div>
+                </div>
+                <div class="mb-3">
+                     <input class="mb-3 form-control" type="text" name="listing[country]" value="<%= listing.country%>" class="form-control" required>
+                     <div class="invalid-feedback"> Country can not be empty</div>
+                    </div>
                 <button class="c-btn">Save</button>
             </form>
         </div>
     </div>
+    <script src="/js/script.js"></script>
         
     
     
