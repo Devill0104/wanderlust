@@ -6,7 +6,7 @@ const mongo_url="mongodb://127.0.0.1:27017/wanderlust";
 const Listing = require("./models/listing.js");
 const methodOverride=require("method-override");
 const ejsMate = require("ejs-mate");
-const wrapAsync = require("./utils/wrapAsync");
+const wrapAsync = require("./utils/wrapAsync.js");
 const ExpressError= require("./utils/ExpressError.js");
 const listingSchema = require("./schema.js");
 
