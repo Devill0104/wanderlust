@@ -2,6 +2,8 @@
 
 
 const mongoose=require("mongoose");
+const schema = mongoose;
+
 const listingSchema = new mongoose.Schema({
     title:{
         type: String,
@@ -17,6 +19,10 @@ const listingSchema = new mongoose.Schema({
     price: Number,
     location: String,
     country: String,
+    review:[{
+        type: schema.Types.ObjectId,
+        ref: "Review",
+    }]
 });
 const Listing= mongoose.model("Listing",listingSchema);
 module.exports=Listing;

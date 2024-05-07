@@ -1,12 +1,11 @@
 <% layout("/layouts/boilerplate.ejs") %>
 <div class="row mt-0">
  <div class="col-8 offset-3">
-    <h3>Listing Details</h3>
+    <h3><%= listing.title %></h3>
     <div class="card col-6 ">
         <img src="<%= listing.image%>" class="card-img-top show-img">
         <div class="card-body">
             <p class="card-text">
-            <b><%= listing.title %><br></b>
             <%= listing.description %><br>
             &#8377;<%= listing.price.toLocaleString("en-IN") %>/night<br>
             <%= listing.location %><br>
@@ -19,6 +18,24 @@
     <a href="/listings/<%= listing._id%>/edit" class="btn edit-btn btn-dark offset-3">Edit </a>
     <form action="/listings/<%= listing._id%>?_method=DELETE" method="POST" >
     <button class="c-btn btn btn-dark offset-4">Delete</button>
+    </form>
+ </div>
+ <div class="col-8 offset-3 mb-3">
+    <hr>
+    <h4>Leave a comment</h4>
+    <form action="/listings/<%= listing._id%>/reviews" method="POST" novalidate class="needs-validation">
+        <div class="mb-3 mt-3">
+            <label for="input" class="form-label">Rating</label>
+            <input type="range" min="1" max="5" class="form-range" id="rating">
+        </div>
+        <div class="mb-3 mt-3">
+            <label for="comment" class="form-label">comments</label>
+            <textarea name="review[comment]" id="comment" row="6" col="12" class="form-control" required></textarea>
+            <div class="invalid-feedback">
+                Please write something to add a review
+            </div>
+        </div>
+        <button class="btn btn-dark">Submit</button>
     </form>
  </div>
 </div>
