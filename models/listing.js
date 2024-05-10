@@ -2,7 +2,7 @@
 
 
 const mongoose=require("mongoose");
-const schema = mongoose;
+const Schema = mongoose.Schema;
 
 const listingSchema = new mongoose.Schema({
     title:{
@@ -19,8 +19,8 @@ const listingSchema = new mongoose.Schema({
     price: Number,
     location: String,
     country: String,
-    review:[{
-        type: schema.Types.ObjectId,
+    reviews : [{
+        type: Schema.Types.ObjectId,
         ref: "Review",
     }]
 });

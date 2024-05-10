@@ -1,8 +1,8 @@
 <% layout("/layouts/boilerplate.ejs") %>
 <div class="row mt-0">
- <div class="col-8 offset-3">
+ <div class="col-8 offset-3 ">
     <h3><%= listing.title %></h3>
-    <div class="card col-6 ">
+    <div class="card col-6 show-card listing-card ">
         <img src="<%= listing.image%>" class="card-img-top show-img">
         <div class="card-body">
             <p class="card-text">
@@ -26,7 +26,7 @@
     <form action="/listings/<%= listing._id%>/reviews" method="POST" novalidate class="needs-validation">
         <div class="mb-3 mt-3">
             <label for="input" class="form-label">Rating</label>
-            <input type="range" min="1" max="5" class="form-range" id="rating">
+            <input type="range" min="1" max="5" class="form-range" id="rating" name="review[rating]">
         </div>
         <div class="mb-3 mt-3">
             <label for="comment" class="form-label">comments</label>
@@ -37,6 +37,22 @@
         </div>
         <button class="btn btn-dark">Submit</button>
     </form>
+    <hr>
+    <p><b>All Reviews</b></p>
+    <div class="row">
+    <% for(let review of listing.reviews){%>
+        <div class="card col-5 ms-3 mb-3">
+            <div class="card-body">
+                <p class="card-title"> Johnny walker</p>
+                <p class="card-text"><%=review.comment%></p>
+                <p class="card-text"><%= review.rating%> star</p>
+                <form action="/listings/<%= listing._id%>/reviews/<%= review._id%>?_method=DELETE" method="POST">
+                    <button class="btn btn-sm btn-dark mb-1"> Delete</button>
+                </form>
+            </div>
+        </div>   
+    <%}%>
  </div>
+</div>
 </div>
         

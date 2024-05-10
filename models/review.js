@@ -1,8 +1,8 @@
 const { required } = require("joi");
 const mongoose= require("mongoose");
-const {schema}= mongoose;
+const Schema= mongoose.Schema;
 
-let reviewSchema = mongoose.Schema({
+let reviewSchema =  new Schema({
     comment : String,
     rating : {
         type: Number,
