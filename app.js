@@ -8,7 +8,18 @@ const ejsMate = require("ejs-mate");
 const ExpressError= require("./utils/ExpressError.js");
 const listings = require("./routes/listing.js");
 const reviews = require("./routes/review.js");
-
+const session = require("express-session");
+const flash = require("connect-flash");
+const sessionOptions= {
+    secret: "mysecretstring",
+    resave: false,
+    saveUninitialized: true,
+    cookie:{
+        expires : Date.now()+7*24*60*60*1000,
+        maxAge: 24*7*60*60*1000,
+        httpOnly: true
+    }
+};
 
 app.set("view engine", "ejs");
 app.set("views",path.join(__dirname,"views"));
@@ -18,6 +29,14 @@ app.use(methodOverride("_method"));
 app.engine('ejs', ejsMate);
 app.use("/listings", listings);
 app.use("/listings/:id/reviews", reviews);
+app.use(session(sessionOptions));
+app.use(flash());
+
+//middleware for flash
+app.use((req, res,next)=>{
+    req.locals.success = req.flash("success");
+    next();
+});
 
 
 
