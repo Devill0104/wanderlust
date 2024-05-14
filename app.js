@@ -27,18 +27,19 @@ app.use(express.static(path.join(__dirname,"public")));
 app.use(express.urlencoded({extended:true}));
 app.use(methodOverride("_method"));
 app.engine('ejs', ejsMate);
-app.use("/listings", listings);
-app.use("/listings/:id/reviews", reviews);
+
 app.use(session(sessionOptions));
 app.use(flash());
 
 //middleware for flash
 app.use((req, res,next)=>{
-    req.locals.success = req.flash("success");
+    res.locals.success =  req.flash("success");
+    res.locals.error= req.flash("error");
     next();
 });
 
-
+app.use("/listings", listings);
+app.use("/listings/:id/reviews", reviews);
 
 //connecting with the db
 main().then(()=>{
