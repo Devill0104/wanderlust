@@ -20,6 +20,9 @@ const sessionOptions= {
         httpOnly: true
     }
 };
+const passport = require("passport");
+const LocalStrategy = require("passport-local");
+const User = require("./models/user.js");
 
 app.set("view engine", "ejs");
 app.set("views",path.join(__dirname,"views"));
@@ -30,6 +33,11 @@ app.engine('ejs', ejsMate);
 
 app.use(session(sessionOptions));
 app.use(flash());
+app.use(passport.initialize());
+app.use(passport.session);
+passport.use(new LocalStrategy(User.authenticate));
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
 
 //middleware for flash
 app.use((req, res,next)=>{
@@ -37,6 +45,8 @@ app.use((req, res,next)=>{
     res.locals.error= req.flash("error");
     next();
 });
+
+
 
 app.use("/listings", listings);
 app.use("/listings/:id/reviews", reviews);
@@ -48,6 +58,16 @@ main().then(()=>{
 async function main(){
     await mongoose.connect(mongo_url);
 }
+
+//creating a demo user
+app.get("/demouser", (req, res)=>{
+    let fakeuser = new User({
+        username: "demouser",
+        email: "demouser@gmail.com"
+    });
+    let registeredUser= User.register(fakeuser, "helloworld");
+    res.send(registeredUser);
+});
 
 //middleware for non-existing routes
 app.all("*", (req, res)=>{
