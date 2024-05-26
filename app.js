@@ -6,8 +6,9 @@ const mongo_url="mongodb://127.0.0.1:27017/wanderlust";
 const methodOverride=require("method-override");
 const ejsMate = require("ejs-mate");
 const ExpressError= require("./utils/ExpressError.js");
-const listings = require("./routes/listing.js");
-const reviews = require("./routes/review.js");
+const listingRouter = require("./routes/listing.js");
+const reviewRouter = require("./routes/review.js");
+const userRouter = require("./routes/user.js");
 const session = require("express-session");
 const flash = require("connect-flash");
 const sessionOptions= {
@@ -34,8 +35,8 @@ app.engine('ejs', ejsMate);
 app.use(session(sessionOptions));
 app.use(flash());
 app.use(passport.initialize());
-app.use(passport.session);
-passport.use(new LocalStrategy(User.authenticate));
+app.use(passport.session());
+passport.use(new LocalStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
@@ -48,8 +49,9 @@ app.use((req, res,next)=>{
 
 
 
-app.use("/listings", listings);
-app.use("/listings/:id/reviews", reviews);
+app.use("/listings", listingRouter);
+app.use("/listings/:id/reviews", reviewRouter);
+app.use("/", userRouter);
 
 //connecting with the db
 main().then(()=>{
@@ -60,14 +62,15 @@ async function main(){
 }
 
 //creating a demo user
-app.get("/demouser", (req, res)=>{
-    let fakeuser = new User({
-        username: "demouser",
-        email: "demouser@gmail.com"
-    });
-    let registeredUser= User.register(fakeuser, "helloworld");
-    res.send(registeredUser);
-});
+// app.get("/demouser3", async (req, res)=>{
+//     let fakeuser3= new User({
+//         username: "demouser3",
+//         email: "demouser3@gmail.com"
+//     });
+//     let registeredUser3= await User.register(fakeuser3, "helloworld");
+//     console.log(registeredUser3);
+//     res.send(registeredUser3);
+// });
 
 //middleware for non-existing routes
 app.all("*", (req, res)=>{
