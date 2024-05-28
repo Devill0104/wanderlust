@@ -17,9 +17,13 @@
           </li>
         </ul>
         <div class="navbar-nav ms-auto">
-          <a class="nav-link" href="/signup">Sign Up</a>
-          <a class="nav-link" href="/login">Log In</a>
-          <a class="nav-link" href="/logout">Log Out</a>
+          <% if(!currUser){ %>
+            <a class="nav-link" href="/signup">Sign Up</a>
+            <a class="nav-link" href="/login">Log In</a>
+          <%} %>
+          <% if(currUser){ %>
+            <a class="nav-link" href="/logout">Log Out</a>
+          <%} %>
         </div>
       </div>
     </div>
