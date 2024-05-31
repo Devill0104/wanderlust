@@ -34,7 +34,7 @@ module.exports.createListing = async (req, res)=>{
 };
 
 //for edit route
-module.exports.renderNewForm = async (req, res)=>{
+module.exports.renderEditForm = async (req, res)=>{
     let {id}= req.params;
     let listing= await Listing.findById(id);
     if(!listing){

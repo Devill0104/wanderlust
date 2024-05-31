@@ -14,7 +14,7 @@ router.route("/").get(wrapAsync(listingController.index))
 
 
 //edit route
-router.get("/:id/edit", isLoggedIn, isOwner,wrapAsync(listingController.renderNewForm));
+router.get("/:id/edit", isLoggedIn, isOwner,wrapAsync(listingController.renderEditForm));
 
 router.route("/:id").get(wrapAsync(listingController.show))
                     .put(isLoggedIn, isOwner,validateListing, wrapAsync(listingController.updateForm))
