@@ -8,20 +8,21 @@ module.exports.renderLoginForm =(req, res)=>{
 };
 
 
-module.exports.saveUser = async(req, res)=>{
+module.exports.saveUser = async(req, res,next)=>{
     try{
         let {username, email, password}=req.body;
-        const newUser = new User({email, username});
-        const registeredUser = await User.register(newUser, password);
+        let newUser = new User({email, username});
+        let registeredUser = await User.register(newUser, password);
         req.login(registeredUser, (err)=>{          //after sign up direct login of user
             if(err){
                 return next(err);
             }
+            req.flash("success", " Welcome to Wanderlust");
+            res.redirect("/listings");
         });
-        req.flash("success", " Welcome to Wanderlust");
-        res.redirect("/listings");
-    }catch(e){
-        req.flash("error", e.message);
+        
+    }catch(err){
+        req.flash("error", err.message);
         res.redirect("/signup");
     }
 };
