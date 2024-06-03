@@ -26,8 +26,11 @@ module.exports.show =  async (req, res)=>{
 
 //for create route
 module.exports.createListing = async (req, res)=>{
+    let url = req.file.path;
+    let filename = req.file.filename;
     let newListing= new Listing(req.body.listing);
     newListing.owner = req.user._id;   //adding the user for newly created listing which would be the curr user
+    newListing.image= {url, filename};
     await newListing.save();
     req.flash("success", "New Listing Created Successfully");
     res.redirect("/listings");

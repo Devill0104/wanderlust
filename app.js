@@ -11,6 +11,7 @@ const reviewRouter = require("./routes/review.js");
 const userRouter = require("./routes/user.js");
 const session = require("express-session");
 const flash = require("connect-flash");
+require('dotenv').config();
 const sessionOptions= {
     secret: "mysecretstring",
     resave: false,
@@ -63,16 +64,6 @@ async function main(){
     await mongoose.connect(mongo_url);
 }
 
-//creating a demo user
-// app.get("/demouser3", async (req, res)=>{
-//     let fakeuser3= new User({
-//         username: "demouser3",
-//         email: "demouser3@gmail.com"
-//     });
-//     let registeredUser3= await User.register(fakeuser3, "helloworld");
-//     console.log(registeredUser3);
-//     res.send(registeredUser3);
-// });
 
 //middleware for non-existing routes
 app.all("*", (req, res)=>{
