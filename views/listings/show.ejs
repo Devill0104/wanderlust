@@ -1,7 +1,7 @@
 <% layout("/layouts/boilerplate.ejs") %>
 <script>
-    let mapToken =  "pk.eyJ1IjoiYWRpdHlhMTktMjEiLCJhIjoiY2x3ejVsdnByMDNuODJzc2ZvaHFhangydyJ9._dD8AcvKmw6Ykwyi7W4E_w";
-    const listing = JSON.stringify(listing);
+    const mapToken = "<%= process.env.MAP_TOKEN%>";
+    const listing = <%- JSON.stringify(listing)%>;
 </script>
 <div class="row mt-0">
  <div class="col-8 offset-3 ">
@@ -89,12 +89,11 @@
     <%}%>
  
   </div>
-  <div class="col-8 offset-3 mt-2 mb-3">
+  <div class="col-8 offset-3 mb-3">
     <h3>Where you'll be</h3>
     <div id="map">
-    </div> 
+    </div>
   </div>
-  
 </div>
 <script src="/js/map.js"></script>
         
