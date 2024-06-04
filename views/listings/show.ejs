@@ -1,4 +1,5 @@
 <% layout("/layouts/boilerplate.ejs") %>
+
 <div class="row mt-0">
  <div class="col-8 offset-3 ">
     <h3><%= listing.title %></h3>
@@ -35,32 +36,34 @@
         </div> -->
       
         
-<fieldset class="starability-slot">
-    <!-- <legend>Rate this place</legend> -->
-    <!-- <h4>Rate this place</h4> -->
-    <input type="radio" id="no-rate" class="input-no-rate" name="review[rating]" value="0" checked aria-label="No rating." />
-    <input type="radio" id="first-rate1" name="review[rating]" value="1" />
-    <label for="first-rate1" title="Terrible">1 star</label>
-    <input type="radio" id="first-rate2" name="review[rating]" value="2" />
-    <label for="first-rate2" title="Not good">2 stars</label>
-    <input type="radio" id="first-rate3" name="review[rating]" value="3" />
-    <label for="first-rate3" title="Average">3 stars</label>
-    <input type="radio" id="first-rate4" name="review[rating]" value="4" />
-    <label for="first-rate4" title="Very good">4 stars</label>
-    <input type="radio" id="first-rate5" name="review[rating]" value="5" />
-    <label for="first-rate5" title="Amazing">5 stars</label>
-  </fieldset>
+    <fieldset class="starability-slot">
+        <!-- <legend>Rate this place</legend> -->
+        <!-- <h4>Rate this place</h4> -->
+        <input type="radio" id="no-rate" class="input-no-rate" name="review[rating]" value="0" checked aria-label="No rating." />
+        <input type="radio" id="first-rate1" name="review[rating]" value="1" />
+        <label for="first-rate1" title="Terrible">1 star</label>
+        <input type="radio" id="first-rate2" name="review[rating]" value="2" />
+        <label for="first-rate2" title="Not good">2 stars</label>
+        <input type="radio" id="first-rate3" name="review[rating]" value="3" />
+        <label for="first-rate3" title="Average">3 stars</label>
+        <input type="radio" id="first-rate4" name="review[rating]" value="4" />
+        <label for="first-rate4" title="Very good">4 stars</label>
+        <input type="radio" id="first-rate5" name="review[rating]" value="5" />
+        <label for="first-rate5" title="Amazing">5 stars</label>
+    </fieldset>
  
-        <div class="mb-3 mt-1">
-            <label for="comment" class="form-label">comments</label>
-            <textarea name="review[comment]" id="comment" row="6" col="12" class="form-control" required></textarea>
-            <div class="invalid-feedback">
-                Please write something to add a review
-            </div>
+    <div class="mb-3 mt-1">
+        <label for="comment" class="form-label">comments</label>
+        <textarea name="review[comment]" id="comment" row="6" col="12" class="form-control" required></textarea>
+        <div class="invalid-feedback">
+            Please write something to add a review
         </div>
-        <button class="btn btn-dark">Submit</button>
+    </div>
+    <button class="btn btn-dark">Submit</button>
     </form>
     <%}%>
+    
+    <% if(listing.reviews.length>0) {%>
     <hr>
     <p><b>All Reviews</b></p>
     <div class="row">
@@ -79,7 +82,26 @@
             </div>
         </div>   
     <%}%>
- </div>
-</div>
+    </div>
+    <%}%>
+ 
+  </div>
+  <div class="col-8 offset-3 mt-2 mb-3">
+    <h3>Where you'll be</h3>
+    <div id="map">
+    </div> 
+  </div>
+  <script>
+    let mapToken =  "<%=process.env.MAP_TOKEN %>";
+    mapboxgl.accessToken = mapToken;
+    const coordinates = "<%= listing.geometry.coordinates%>";
+    const map = new mapboxgl.Map({
+        container: 'map', // container ID
+        center: coordinates, // starting position [lng, lat]
+        zoom: 9 // starting zoom
+        });
+    console.log( coordinates);
+    // const marker = new mapboxgl.Marker({color: red}).setLngLat(coordinates).addTo(map);
+</script>
 </div>
         

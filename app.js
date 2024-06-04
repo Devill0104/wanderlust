@@ -1,3 +1,7 @@
+//node env is development
+if(process.env.NODE_ENV != "production"){
+    require('dotenv').config();
+}
 const express= require("express");
 const app=express();
 const path=require("path");
@@ -11,7 +15,7 @@ const reviewRouter = require("./routes/review.js");
 const userRouter = require("./routes/user.js");
 const session = require("express-session");
 const flash = require("connect-flash");
-require('dotenv').config();
+
 const sessionOptions= {
     secret: "mysecretstring",
     resave: false,
