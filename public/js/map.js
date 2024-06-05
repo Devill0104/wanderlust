@@ -2,10 +2,9 @@ mapboxgl.accessToken = mapToken;
 const map = new mapboxgl.Map({
     container: 'map', // container ID
     style: "mapbox://styles/mapbox/streets-v12",
-    center: listing.goemetry.coordinates, // starting position [lng, lat]
+    center: listing.goemetry.coordinates,//[77.2088,28.6139],  // starting position [lng, lat]
     zoom: 9 // starting zoom
     });
-    console.log(listing.goemetry.coordinates);
 
     const marker = new mapboxgl.Marker()
                 .setLngLat(listing.goemetry.coordinates)
