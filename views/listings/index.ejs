@@ -1,5 +1,46 @@
 <% layout("/layouts/boilerplate.ejs") %>
 <body>
+    <div id="filters">
+        <div class="filter">
+            <i class="fa-solid fa-fire"></i>
+            <p>Trending</p>
+        </div>
+        <div class="filter">
+            <i class="fa-solid fa-bed"></i>
+            <p>Rooms</p>
+        </div>
+        <div class="filter">
+            <i class="fa-solid fa-mountain-city"></i>
+            <p>Iconic Cities</p>
+        </div>
+        <div class="filter">
+            <i class="fa-solid fa-mountain-sun"></i>
+            <p>Mountain</p>
+        </div>
+        <div class="filter">
+            <i class="fa-solid fa-person-swimming"></i>
+            <p>Amazing Pools</p>
+        </div>
+        <div class="filter">
+            <i class="fa-solid fa-campground"></i>
+            <p>Camping</p>
+        </div>
+        <div class="filter">
+            <i class="fa-solid fa-cow"></i>
+            <p>Farms</p>
+        </div>
+        <div class="filter">
+            <i class="fa-solid fa-snowflake"></i>
+            <p>Arctic</p>
+        </div>
+        <div class="tax-toggle mb-3 ms-auto">
+            <div class="form-check-reverse form-switch">
+                <input type="checkbox" class="form-check-input" role="switch" id="flexSwitchCheckDefault">
+                <label for="flexSwitchCheckDefault" class="form-check-label">Display Total After Taxes</label>
+            </div>
+        </div>
+    </div>
+   
     <div class="row row-cols-lg-3 row-cols-md-2 row-cols-sm-1">
         
             <% for(let listing of allListings){ %>
@@ -11,9 +52,12 @@
                         <p class="card-text">
                             <b><%= listing.title %></b><br>
                             &#8377;<%= listing.price.toLocaleString("en-IN") %>/night%>
+                            <i class="tax-info"> &nbsp;  +&nbsp;<b>18% GST</b></i>
                         </p>
                     </div>
                 </div></a>
             <% } %>
     </div>
+    <script src="/js/switch.js">    
+    </script>
 </body>

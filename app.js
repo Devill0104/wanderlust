@@ -6,7 +6,8 @@ const express= require("express");
 const app=express();
 const path=require("path");
 const mongoose=require("mongoose");
-const mongo_url="mongodb://127.0.0.1:27017/wanderlust";
+// const mongo_url="mongodb://127.0.0.1:27017/wanderlust";
+const dbUrl  = process.env.ATLAS_URL;
 const methodOverride=require("method-override");
 const ejsMate = require("ejs-mate");
 const ExpressError= require("./utils/ExpressError.js");
@@ -17,7 +18,7 @@ const session = require("express-session");
 const flash = require("connect-flash");
 
 const sessionOptions= {
-    secret: "mysecretstring",
+    secret: process.env.SECRET,
     resave: false,
     saveUninitialized: true,
     cookie:{
@@ -65,8 +66,9 @@ main().then(()=>{
     console.log("connected to db");
 }).catch((err)=> console.log(err));
 async function main(){
-    await mongoose.connect(mongo_url);
+    await mongoose.connect(dbUrl);
 }
+
 
 
 //middleware for non-existing routes

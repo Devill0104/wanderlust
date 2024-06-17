@@ -37,13 +37,13 @@ module.exports.createListing = async (req, res)=>{
     }).send();
     let url = req.file.path;
     let filename = req.file.filename;
-    let newListing= new Listing(req.body.listing);       //req.body.listing;  
+    // console.log(req.body);
+    let newListing= new Listing(req.body.listing); 
+    // newListing.category = req.body.listing.category;      //req.body.listing;  
     newListing.owner = req.user._id;   //adding the user for newly created listing which would be the curr user
     newListing.image= {url, filename};
     newListing.geometry = response.body.features[0].geometry;
     await newListing.save();
-    console.log(newListing);
-    // console.log(listing);
     req.flash("success", "New Listing Created Successfully");
     res.redirect("/listings");
 };
