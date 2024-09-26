@@ -1,4 +1,4 @@
-it is a clone of Airbnb site made using html, css and javascript for frontend and express.js, node.js and mongodb for backend and database handling parts.
+This is a travel and explore site inspired by Airbnb. It is made using html, css and javascript for frontend and express.js, node.js and mongodb for backend and database handling parts.
 
 Key features:-
   1. implements MVC framework
